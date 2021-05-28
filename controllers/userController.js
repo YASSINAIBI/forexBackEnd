@@ -34,7 +34,6 @@ exports.getUserTotalAmount = (req, res, next) => {
 
         req.userSold = Uemail.sold
         req.walletSold = Uemail.walletSold
-        req.userUnfo = Uemail
             next()
     })
 }
@@ -109,6 +108,17 @@ exports.addSellToWallet = (req, res) => {
 }
 
 // info
+exports.getProfileInfo = (req, res, next) => {
+    User.findOne({email: req.params.email}, (error, Uemail) => {
+        if(error)
+            return res.status(400).json({error: error})
+
+        req.userUnfo = Uemail
+            next()
+    })
+}
+
 exports.getuserUnfo = (req, res) => {
     res.send(req.userUnfo)
 }
+
